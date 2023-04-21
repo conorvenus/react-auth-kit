@@ -22,6 +22,7 @@ import {useLocation, Navigate} from 'react-router-dom';
 import AuthContext from './AuthContext';
 import {AuthKitError} from './errors';
 import {isAuthenticated} from './utils/utils';
+import useSignOut from './hooks/useSignOut';
 
 interface RequireAuthProps {
   children: JSX.Element,
@@ -48,9 +49,10 @@ const RequireAuth: React.FunctionComponent<RequireAuthProps> =
     }
 
     const location = useLocation();
+    const signOut = useSignOut();
 
     if (!isAuthenticated(context.authState)) {
-      context.signOut();
+      signOut();
       return <Navigate to={loginPath} state={{from: location}} replace />;
     }
 
