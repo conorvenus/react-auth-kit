@@ -20,7 +20,6 @@
 
 import * as React from 'react';
 import AuthContext from '../AuthContext';
-import {doSignOut} from '../utils/reducers';
 import {AuthKitError} from '../errors';
 
 /**
@@ -44,7 +43,7 @@ function useSignOut(): () => (boolean) {
   return () => {
     try {
       if (context) {
-        context.dispatch(doSignOut());
+        context.signOut();
         return true;
       } else {
         return false;
